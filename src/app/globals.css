@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --mainBg: #1976d2;
+}
+.image-container:hover .image-item {
+  filter: brightness(0.5);
+}
+
+.scrollable-image-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  overflow-x: scroll;
+  padding-bottom: 12px;
+}
+
+.collection-option {
+  @apply w-full px-4 py-1 rounded-lg hover:bg-slate-300 text-left;
+}
+
+.form-div-control {
+  @apply w-full outline-none rounded-xl focus-within:ring-blue-600;
+}
+
+.form-control {
+  @apply w-full pl-2 py-3 rounded-xl focus:outline-none text-black;
+}
+
+.form-control:focus + * {
+  color: var(--mainBg);
+}
+
+.form-control:not([type="email"]) ~ span:hover {
+  color: var(--mainBg);
+}
