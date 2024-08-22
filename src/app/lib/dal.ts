@@ -1,4 +1,11 @@
 import "server-only";
+const dal = () => {
+  return;
+};
+
+export default dal;
+
+/* import "server-only";
 
 import { cookies } from "next/headers";
 import { decrypt } from "@/app/lib/session";
@@ -39,3 +46,4 @@ export const getUser = cache(async () => {
     return null;
   }
 });
+ */
