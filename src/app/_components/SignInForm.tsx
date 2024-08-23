@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { signup } from "../actions/auth";
 import { useFormState, useFormStatus } from "react-dom";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
+import { signup } from "../actions";
 
 export function SignInForm() {
   const [show, setShow] = React.useState(false);
