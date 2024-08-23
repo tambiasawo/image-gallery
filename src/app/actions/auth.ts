@@ -32,7 +32,7 @@ export const signup = async (prevState: any, formData: FormData) => {
   if (user) {
     const hashedPassword = bcryptjs.compareSync(password, user.password);
     if (hashedPassword) {
-      await createSession(user.id);
+      await createSession(String(user.id));
       redirect("/");
     }
   }
