@@ -4,12 +4,21 @@ import { useFilterContext } from "../utils/context/filterContext";
 import LightBoxModal from "./LightBoxModal";
 import { Image } from "../lib/types";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import Pagination from "@mui/material/Pagination";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ITEMS_PER_PAGE } from "../lib/constants.d";
+import { useAppDispatch, useAppSelector, useAppStore } from "../store/hooks";
+import { addSave, getSavedImages, removeSaved } from "../store/savedSlice";
+import { addLike, removeLike } from "../store/likedSlice";
 
 const Gallery = () => {
+  const dispatch = useAppDispatch();
+  const { saves: savedImages } = useAppSelector((state) => state.saves);
+  const { likes: likedImages } = useAppSelector((state) => state.likes);
+
   const { filters, checkedCategories } = useFilterContext();
   const [open, setOpen] = React.useState(false);
   const [imageID, setImageID] = React.useState("");
@@ -22,7 +31,7 @@ const Gallery = () => {
     isLoading,
     error,
   } = useImages({ ...filters, checkedCategories, page });
-
+  console.log(likedImages.length);
   const handleOpen = (id: number) => {
     setImageID(id.toString());
     setOpen(true);
@@ -43,9 +52,21 @@ const Gallery = () => {
     setPage(value);
   };
 
-  const handleFavorite = () => {};
+  const handleFavorite = (img_id: number, img_src: string) => {
+    dispatch(addLike({ img_id, img_src }));
+  };
 
-  const handleBookmark = () => {};
+  const handleRemoveLike = (img_id: number, img_src: string) => {
+    dispatch(removeLike({ img_id, img_src }));
+  };
+
+  const handleAddBookmark = (img_id: number, img_src: string) => {
+    dispatch(addSave({ img_id, img_src }));
+  };
+
+  const handleRemoveBookmark = (img_id: number, img_src: string) => {
+    dispatch(removeSaved({ img_id, img_src }));
+  };
 
   if (isLoading)
     return (
@@ -71,7 +92,10 @@ const Gallery = () => {
           </div>
         )}
         {images.map((image: Image) => {
-          const { id } = image;
+          const { id, largeImageURL } = image;
+          const isSaved = savedImages.find((image) => image.img_id === id);
+          const isLiked = likedImages.find((image) => image.img_id === id);
+
           return (
             <div
               onMouseEnter={(e) => handleMouseEnter(id)}
@@ -80,12 +104,12 @@ const Gallery = () => {
               key={id}
             >
               <img
-                className="rounded-lg w-[250px] h-[300px] object-cover shadow-md image-item"
-                src={image.largeImageURL}
+                className="image-grid-item image-item"
+                src={largeImageURL}
                 alt={image.tags}
                 width={250}
                 height={200}
-                onClick={(e) => handleOpen(image.id)}
+                onClick={(e) => handleOpen(id)}
               />
 
               {hoveredImageId === id && (
@@ -95,10 +119,30 @@ const Gallery = () => {
                 >
                   <p className="flex justify-center items-center gap-8 text-white ">
                     <span className="flex flex-col items-center">
-                      <FavoriteBorderIcon onClick={handleFavorite} />
+                      {isLiked ? (
+                        <FavoriteIcon
+                          onClick={() => handleRemoveLike(id, largeImageURL)}
+                          className="text-red-600"
+                        />
+                      ) : (
+                        <FavoriteBorderIcon
+                          onClick={() => handleFavorite(id, largeImageURL)}
+                        />
+                      )}
                     </span>
+
                     <span className="flex flex-col items-center">
-                      <BookmarkBorderOutlinedIcon onClick={handleBookmark} />
+                      {isSaved ? (
+                        <BookmarkIcon
+                          onClick={() =>
+                            handleRemoveBookmark(id, largeImageURL)
+                          }
+                        />
+                      ) : (
+                        <BookmarkBorderOutlinedIcon
+                          onClick={() => handleAddBookmark(id, largeImageURL)}
+                        />
+                      )}
                     </span>
                   </p>
                 </div>
