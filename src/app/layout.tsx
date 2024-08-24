@@ -4,6 +4,7 @@ import "./globals.css";
 import QueryProvider from "./utils/providers/QueryProvider";
 import { FilterContextProvider } from "./utils/providers/FilterContextProvider";
 import Header from "./_components/Header";
+import ReduxProvider from "./utils/providers/ReduxProvider";
 
 export const metadata: Metadata = {
   title: "Images Filtering",
@@ -18,12 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="mx-auto w-[80%] ">
-        <QueryProvider>
-          <FilterContextProvider>
-            <Header />
-            {children}
-          </FilterContextProvider>
-        </QueryProvider>
+        <ReduxProvider>
+          <QueryProvider>
+            <FilterContextProvider>
+              <Header />
+              {children}
+            </FilterContextProvider>
+          </QueryProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
