@@ -17,6 +17,10 @@ export const signup = async (prevState: any, formData: FormData) => {
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
+  
+  console.log({ validatedFields });
+  console.log(process.env.NEXT_PUBLIC_NODE_ENV);
+
   const { username, password } = validatedFields.data;
   const user = await prisma.user.findUnique({
     where: {
