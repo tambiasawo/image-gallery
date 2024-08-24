@@ -1,10 +1,9 @@
 import "server-only";
 import { SignJWT, jwtVerify } from "jose";
-import "server-only";
 import { cookies } from "next/headers";
 //import { SessionPayload } from '@/app/lib/definitions'
 
-const secretKey = process.env.SESSION_SECRET;
+const secretKey = process.env.NEXT_PUBLIC_SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
@@ -40,5 +39,5 @@ export async function createSession(userId: string) {
 }
 
 export function deleteSession() {
-    cookies().delete('session')
-  }
+  cookies().delete("session");
+}
