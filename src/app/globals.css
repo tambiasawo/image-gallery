@@ -8,6 +8,9 @@
 .image-container:hover .image-item {
   filter: brightness(0.5);
 }
+.image-grid-item {
+  @apply rounded-lg w-[250px] h-[300px] object-cover shadow-md;
+}
 
 .scrollable-image-container {
   display: flex;
@@ -19,7 +22,7 @@
 }
 
 .collection-option {
-  @apply w-full px-4 py-1 rounded-lg hover:bg-slate-300 text-left;
+  @apply w-full px-7 py-1 rounded-lg hover:bg-slate-200 ;
 }
 
 .form-div-control {
