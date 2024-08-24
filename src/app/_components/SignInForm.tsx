@@ -40,7 +40,7 @@ export function SignInForm() {
             type={show ? "text" : "password"}
             placeholder="Password"
             name="password"
-            value={"12223434"}
+            value={"admin1"}
             className="form-control"
             readOnly
           />
