@@ -38,7 +38,7 @@ export const GithubLoginAction = async (provider: string) => {
   }
 };
 
-export const credentialsLogin = async (credentials) => {
+export const credentialsLogin = async (credentials:any) => {
   console.log({ credentials });
   try {
     await signIn("credentials", credentials, { redirectTo: "/" }); // Ensure signIn is async
