@@ -11,6 +11,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.4.2",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.7",
@@ -26,6 +27,7 @@
     "mongodb": "^6.7.0",
     "mongoose": "^5.10.14",
     "next": "latest",
+    "next-auth": "^5.0.0-beta.20",
     "react": "latest",
     "react-dom": "latest",
     "react-redux": "^9.1.2",

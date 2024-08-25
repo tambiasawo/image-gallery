@@ -1,3 +1,4 @@
+export { auth as middleware } from "../../auth";
 /* import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "@/app/lib/session";
 import { cookies } from "next/headers";

@@ -31,7 +31,7 @@ const Gallery = () => {
     isLoading,
     error,
   } = useImages({ ...filters, checkedCategories, page });
-  console.log(likedImages.length);
+
   const handleOpen = (id: number) => {
     setImageID(id.toString());
     setOpen(true);

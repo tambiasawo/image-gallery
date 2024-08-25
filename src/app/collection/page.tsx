@@ -1,14 +1,13 @@
-"use client";
 import React from "react";
 import Divider from "@mui/material/Divider";
 import { useAppSelector } from "../store/hooks";
 import { getSavedImages } from "../store/savedSlice";
-import Image from "next/image";
 
-const Collection = () => {
+const Collection =  () => {
   const { saves: savedImages } = useAppSelector((state) => state.saves);
   const { likes: likedImages } = useAppSelector((state) => state.likes);
-
+ 
+  //console.log({ user });
   const [displayedImages, setDisplayedImages] = React.useState(likedImages);
   const [currentTab, setCurrentTab] = React.useState("likes");
   const showLikedImages = () => {
