@@ -14,7 +14,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
         </Link>
 
         <div className="flex justify-between gap-3">
-          {!isLoggedIn ? (
+          {/*   {!isLoggedIn ? (
             <Link href="/login" className="hover:underline">
               Login
             </Link>
@@ -22,7 +22,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
             <Link href="" className="hover:underline" onClick={() => {}}>
               Logout
             </Link>
-          )}
+          )} */}
           <Link href="/collection" className="hover:underline">
             My Collection
           </Link>
