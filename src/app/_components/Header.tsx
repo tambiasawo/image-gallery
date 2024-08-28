@@ -16,7 +16,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
 
         <div className="flex justify-between gap-3">
           <Tooltip title="Coming Soon...">
-            <Link href="/login" className="hover:underline">
+            <Link href="#" className="hover:underline text-gray-500" aria-disabled >
               Login
             </Link>
           </Tooltip>
