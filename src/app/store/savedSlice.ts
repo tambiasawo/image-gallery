@@ -22,6 +22,7 @@ export const savedSlice = createSlice({
       temp.push(payload);
       state.saves = temp;
     },
+
     removeSaved: (state, { payload }) => {
       const temp = [...state.saves];
       const deleteIndex = state.saves.findIndex(
@@ -30,12 +31,15 @@ export const savedSlice = createSlice({
       temp.splice(deleteIndex, 1);
       state.saves = temp;
     },
+    clearSaved: (state) => {
+      state.saves = [];
+    },
   },
 });
 
-export const { addSave, removeSaved } = savedSlice.actions;
+export const { addSave, removeSaved, clearSaved } = savedSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const getSavedImages = (state: RootState) => state.saves;
+export const getSavedImages = (state: RootState) => state.saves
 
 export default savedSlice.reducer;

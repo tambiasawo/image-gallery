@@ -11,8 +11,8 @@ import Pagination from "@mui/material/Pagination";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ITEMS_PER_PAGE } from "../lib/constants.d";
 import { useAppDispatch, useAppSelector, useAppStore } from "../store/hooks";
-import { addSave, getSavedImages, removeSaved } from "../store/savedSlice";
-import { addLike, removeLike } from "../store/likedSlice";
+import { addSave, removeSaved, clearSaved } from "../store/savedSlice";
+import { addLike, removeLike, clearLikes } from "../store/likedSlice";
 
 const Gallery = () => {
   const dispatch = useAppDispatch();
@@ -68,6 +68,12 @@ const Gallery = () => {
     dispatch(removeSaved({ img_id, img_src }));
   };
 
+  /*  React.useEffect(() => {
+    dispatch(clearSaved());
+    dispatch(clearLikes());
+  }, []); */
+
+  
   if (isLoading)
     return (
       <div className="grid place-items-center h-[100vh]">

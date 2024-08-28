@@ -30,10 +30,13 @@ export const likesSlice = createSlice({
       temp.splice(deleteIndex, 1);
       state.likes = temp;
     },
+    clearLikes: (state) => {
+      state.likes = [];
+    },
   },
 });
 
-export const { addLike, removeLike } = likesSlice.actions;
+export const { addLike, removeLike, clearLikes } = likesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const getLikedImages = (state: RootState) => state.likes;

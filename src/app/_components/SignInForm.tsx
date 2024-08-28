@@ -6,6 +6,7 @@ import FingerprintIcon from "@mui/icons-material/Fingerprint";
 //import { authenticate } from "../actions";
 import GithubLogin from "./GithubLogin";
 import { credentialsLogin, GithubLoginAction } from "../actions";
+import { redirect } from "next/navigation";
 
 export function SignInForm() {
   const [show, setShow] = React.useState(false);
@@ -14,6 +15,11 @@ export function SignInForm() {
 
   //const [state, action] = useFormState(authenticate, undefined);
   const { pending } = useFormStatus();
+
+  const signInHandler = () => {
+    console.log("signing in");
+    redirect("/");
+  };
 
   return (
     <section className=" md:w-1/2 mx-auto py-8 flex flex-col justify-center bg-white  px-3 rounded-md w-[90%]">
@@ -59,20 +65,18 @@ export function SignInForm() {
           type="submit"
           className="bg-mainBg w-full py-2 rounded-xl"
           aria-disabled={pending}
-          onClick={() =>
-            credentialsLogin({ username: "admin1", password: "admin1" })
-          }
+          onClick={signInHandler}
         >
           Sign In
         </button>
-        <button
+        {/*   <button
           type="button"
           className="bg-mainBg w-full py-2 rounded-xl border border-mainBg"
           aria-disabled={pending}
           onClick={() => GithubLoginAction("github")}
         >
           <GithubLogin />
-        </button>
+        </button> */}
       </form>
     </section>
   );
