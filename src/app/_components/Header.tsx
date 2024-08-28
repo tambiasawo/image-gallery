@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import logo from "../assets/logo.png";
 import Image from "next/image";
+import { Tooltip } from "@mui/material";
 //import { logout } from "../actions";
 
 const Header = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
@@ -14,15 +15,11 @@ const Header = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
         </Link>
 
         <div className="flex justify-between gap-3">
-          {/*   {!isLoggedIn ? (
+          <Tooltip title="Coming Soon...">
             <Link href="/login" className="hover:underline">
               Login
             </Link>
-          ) : (
-            <Link href="" className="hover:underline" onClick={() => {}}>
-              Logout
-            </Link>
-          )} */}
+          </Tooltip>
           <Link href="/collection" className="hover:underline">
             My Collection
           </Link>
