@@ -12,7 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
-    Credentials({
+    /*   Credentials({
       async authorize(credentials) {
         try {
           const user = await prisma.user.findUnique({
@@ -29,7 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null;
         }
       },
-    }),
+    }), */
   ],
   /* callbacks: {
     async jwt({ token, user }) {
