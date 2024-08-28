@@ -2,7 +2,7 @@
 import React from "react";
 import Divider from "@mui/material/Divider";
 import { RootState } from "../store";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import CloseIcon from "@mui/icons-material/Close";
 import { removeSaved } from "../store/savedSlice";
 import { removeLike } from "../store/likedSlice";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
@@ -76,10 +76,14 @@ const Collection = () => {
             {displayedImages.map((image) => (
               <div key={image.img_id} className="relative group">
                 <button
-                  className="hidden rounded-[50%] cursor-pointer absolute right-2 top-2 group-hover:block"
+                  className=" hidden rounded-[50%] cursor-pointer absolute right-2 top-2 group-hover:block "
                   onClick={() => handleClear(image)}
                 >
-                  <HighlightOffIcon htmlColor="red" />
+                  <CloseIcon
+                    htmlColor="red"
+                    className="bg-white rounded-[50%] p-0"
+                    fontSize="small"
+                  />
                 </button>
                 <img
                   key={image.img_id}
@@ -89,6 +93,9 @@ const Collection = () => {
                 />
               </div>
             ))}
+            {displayedImages.length === 0 && (
+              <p className="center">No images added</p>
+            )}
           </div>
         </div>
       </div>
