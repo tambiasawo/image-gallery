@@ -5,7 +5,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
 //import { authenticate } from "../actions";
 import GithubLogin from "./GithubLogin";
-import { credentialsLogin, GithubLoginAction } from "../actions";
+//import { credentialsLogin, GithubLoginAction } from "../actions";
 import { redirect } from "next/navigation";
 
 export function SignInForm() {
