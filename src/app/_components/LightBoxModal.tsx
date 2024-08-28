@@ -7,9 +7,12 @@ import { Image } from "../lib/types";
 import { Chip, IconButton } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Link from "next/link";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-
+import { useAppSelector } from "../store/hooks";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import DownloadIcon from "@mui/icons-material/Download";
 const style = {
   top: "50%",
   left: "50%",
@@ -25,20 +28,35 @@ export default function LightBoxModal({
   open,
   onClose: handleClose,
   content,
+  onSave,
+  onRemoveSave,
+  onLike,
+  onRemoveLike,
 }: {
   open: boolean;
   onClose: () => void;
   content: { imageID: string; images: Image[] };
+  onSave: (img_id: number, img_src: string) => void;
+  onRemoveSave: (img_id: number, img_src: string) => void;
+  onLike: (img_id: number, img_src: string) => void;
+  onRemoveLike: (img_id: number, img_src: string) => void;
 }) {
   const { imageID, images } = content;
+
+  const { saves: savedImages } = useAppSelector((state) => state.saves);
+  const { likes: likedImages } = useAppSelector((state) => state.likes);
 
   const index = images.findIndex(
     (image: Image) => image.id === Number(imageID)
   );
+
   const [activeImageIndex, setActiveImageIndex] = React.useState<number>(index);
-  const [activeImage, setActiveImage] = React.useState<Image | null>(
+  const [activeImage, setActiveImage] = React.useState<Image>(
     images[activeImageIndex]
   );
+
+  const isSaved = savedImages.find((image) => image.img_id === activeImage?.id);
+  const isLiked = likedImages.find((image) => image.img_id === activeImage?.id);
 
   const handleNext = () => {
     setActiveImageIndex((prev) => prev + 1);
@@ -55,6 +73,23 @@ export default function LightBoxModal({
     setActiveImageIndex(clickedImageIndex);
   };
 
+  const handleDownload = (imageUrl: string, title: string) => {
+    const link = document.createElement("a");
+    link.href = imageUrl;
+
+    // Set the download attribute with the desired file name
+    link.download = "download";
+
+    // Append the link to the body
+    document.body.appendChild(link);
+
+    // Trigger the download by simulating a click
+    link.click();
+
+    // Remove the link from the body
+    document.body.removeChild(link);
+  };
+
   React.useEffect(() => {
     setActiveImage(images[activeImageIndex]);
   }, [activeImageIndex]);
@@ -62,6 +97,7 @@ export default function LightBoxModal({
   React.useEffect(() => {
     setActiveImageIndex(index);
   }, [index, images]);
+
 
   return (
     <Modal
@@ -85,8 +121,51 @@ export default function LightBoxModal({
 
           <Box className="space-y-2">
             <Box className="flex justify-end gap-3">
-              <FavoriteBorderIcon className="hover:cursor-pointer" />
-              <BookmarkBorderOutlinedIcon className="hover:cursor-pointer" />
+              {isLiked ? (
+                <IconButton
+                  onClick={() =>
+                    onRemoveLike(activeImage?.id, activeImage?.largeImageURL)
+                  }
+                >
+                  <FavoriteIcon className="text-red-600 cursor-pointer" />
+                </IconButton>
+              ) : (
+                <IconButton
+                  onClick={() =>
+                    onLike(activeImage?.id, activeImage?.largeImageURL)
+                  }
+                >
+                  <FavoriteBorderIcon
+                    className="cursor-pointer"
+                    htmlColor="#000"
+                  />
+                </IconButton>
+              )}
+              {isSaved ? (
+                <IconButton
+                  onClick={() =>
+                    onSave(activeImage?.id, activeImage?.largeImageURL)
+                  }
+                  className="cursor-pointer"
+                >
+                  <BookmarkIcon htmlColor="#000" />
+                </IconButton>
+              ) : (
+                <IconButton
+                  onClick={() =>
+                    onSave(activeImage?.id, activeImage?.largeImageURL)
+                  }
+                  className="cursor-pointer"
+                >
+                  <BookmarkBorderOutlinedIcon
+                    onClick={() =>
+                      onRemoveSave(activeImage?.id, activeImage?.largeImageURL)
+                    }
+                    className="cursor-pointer"
+                    htmlColor="#000"
+                  />
+                </IconButton>
+              )}
             </Box>
             <img
               src={activeImage?.largeImageURL}

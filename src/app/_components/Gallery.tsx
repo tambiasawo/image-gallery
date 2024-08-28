@@ -52,28 +52,39 @@ const Gallery = () => {
     setPage(value);
   };
 
-  const handleFavorite = (img_id: number, img_src: string) => {
-    dispatch(addLike({ img_id, img_src }));
-  };
+  const handleAddLike = React.useCallback(
+    (img_id: number, img_src: string) => {
+      dispatch(addLike({ img_id, img_src }));
+    },
+    [dispatch]
+  );
 
-  const handleRemoveLike = (img_id: number, img_src: string) => {
-    dispatch(removeLike({ img_id, img_src }));
-  };
+  const handleRemoveLike = React.useCallback(
+    (img_id: number, img_src: string) => {
+      dispatch(removeLike({ img_id, img_src }));
+    },
+    [dispatch]
+  );
 
-  const handleAddBookmark = (img_id: number, img_src: string) => {
-    dispatch(addSave({ img_id, img_src }));
-  };
+  const handleAddBookmark = React.useCallback(
+    (img_id: number, img_src: string) => {
+      dispatch(addSave({ img_id, img_src }));
+    },
+    [dispatch]
+  );
 
-  const handleRemoveBookmark = (img_id: number, img_src: string) => {
-    dispatch(removeSaved({ img_id, img_src }));
-  };
+  const handleRemoveBookmark = React.useCallback(
+    (img_id: number, img_src: string) => {
+      dispatch(removeSaved({ img_id, img_src }));
+    },
+    [dispatch]
+  );
 
   /*  React.useEffect(() => {
     dispatch(clearSaved());
     dispatch(clearLikes());
   }, []); */
 
-  
   if (isLoading)
     return (
       <div className="grid place-items-center h-[100vh]">
@@ -132,7 +143,7 @@ const Gallery = () => {
                         />
                       ) : (
                         <FavoriteBorderIcon
-                          onClick={() => handleFavorite(id, largeImageURL)}
+                          onClick={() => handleAddLike(id, largeImageURL)}
                         />
                       )}
                     </span>
@@ -170,6 +181,10 @@ const Gallery = () => {
         open={open}
         onClose={handleClose}
         content={{ images, imageID }}
+        onSave={handleAddBookmark}
+        onRemoveSave={handleRemoveBookmark}
+        onLike={handleAddLike}
+        onRemoveLike={handleRemoveLike}
       />
     </div>
   );
