@@ -41,9 +41,12 @@ export const FilterContextProvider = ({
     ...categories,
   });
 
-  const handleFiltersChange = React.useCallback((e: any) => {
-    setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  }, []);
+  const handleFiltersChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    },
+    []
+  );
 
   const handleChange = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

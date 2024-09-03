@@ -10,9 +10,9 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import Pagination from "@mui/material/Pagination";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ITEMS_PER_PAGE } from "../lib/constants.d";
-import { useAppDispatch, useAppSelector, useAppStore } from "../store/hooks";
-import { addSave, removeSaved, clearSaved } from "../store/savedSlice";
-import { addLike, removeLike, clearLikes } from "../store/likedSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addSave, removeSaved } from "../store/savedSlice";
+import { addLike, removeLike } from "../store/likedSlice";
 
 const Gallery = () => {
   const dispatch = useAppDispatch();
@@ -79,11 +79,6 @@ const Gallery = () => {
     },
     [dispatch]
   );
-
-  /*  React.useEffect(() => {
-    dispatch(clearSaved());
-    dispatch(clearLikes());
-  }, []); */
 
   if (isLoading)
     return (

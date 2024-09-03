@@ -7,7 +7,9 @@ type FilterContext = {
   categories: Category;
   checkedCategories: Category;
   count: number;
-  handleFiltersChange: (e: any) => void;
+  handleFiltersChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleClear: () => void;
   handleBlur: () => void;

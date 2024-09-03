@@ -51,7 +51,7 @@ const Filters = () => {
           aria-expanded={showImageTypePanel ? "true" : undefined}
           onClick={handleClick}
           label={`Category ${showCountValue ? `(${count})` : ""}`}
-          className="px-2"
+          className="px-7"
         />
         <Menu
           id="basic-menu"
