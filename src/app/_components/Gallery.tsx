@@ -100,6 +100,10 @@ const Gallery = () => {
         <p> An error occurred. Please try again.</p>
       </div>
     );
+  React.useEffect(() => {
+    console.log({ session });
+  }, [session]);
+
   return (
     <div>
       <div className="flex flex-wrap gap-3 mt-8 items-center justify-center">
