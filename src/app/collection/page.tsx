@@ -10,11 +10,14 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 const Collection = () => {
-  const { data: session } = useSession();
-  if (!session) {
+  const { data: session } = useSession({
+    required: true,
+  });
+
+  /* if (!session) {
     redirect("/login");
   }
-
+ */
   const dispatch = useAppDispatch();
   const { saves: savedImages } = useAppSelector(
     (state: RootState) => state.saves
