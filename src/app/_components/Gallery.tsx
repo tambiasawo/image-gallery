@@ -102,7 +102,7 @@ const Gallery = () => {
     );
   React.useEffect(() => {
     console.log({ session });
-  }, [session]);
+  }, []);
 
   return (
     <div>
