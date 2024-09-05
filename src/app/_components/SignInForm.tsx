@@ -17,11 +17,6 @@ export function SignInForm() {
   const [state, action] = useFormState(authenticate, undefined);
   const { pending } = useFormStatus();
 
-  const signInHandler = () => {
-    console.log("signing in");
-    redirect("/");
-  };
-
   return (
     <section className=" md:w-1/2 mx-auto py-8 flex flex-col justify-center bg-white  px-3 rounded-md w-[90%]">
       <h2 className="text-center text-black font-semibold text-2xl">Login</h2>
@@ -68,7 +63,6 @@ export function SignInForm() {
           type="submit"
           className="bg-mainBg w-full py-2 rounded-xl"
           aria-disabled={pending}
-          onClick={signInHandler}
         >
           Sign In
         </button>
