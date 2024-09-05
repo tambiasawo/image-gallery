@@ -5,7 +5,7 @@ import logo from "../assets/logo.png";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 
-const Header = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
+const Header = () => {
   const { data: session } = useSession();
 
   return (
@@ -16,7 +16,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
         </Link>
 
         <div className="flex justify-between gap-3">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <Link href="/collection" className="hover:underline">
               My Collection
             </Link>
