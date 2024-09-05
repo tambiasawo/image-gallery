@@ -100,9 +100,6 @@ const Gallery = () => {
         <p> An error occurred. Please try again.</p>
       </div>
     );
-  React.useEffect(() => {
-    console.log({ session });
-  }, []);
 
   return (
     <div>
