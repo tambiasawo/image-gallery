@@ -21,7 +21,7 @@ export default async function RootLayout({
   return (
     <AuthProvider>
       <html lang="en">
-        <body className="mx-auto w-[80%] ">
+        <body className="">
           <ReduxProvider>
             <QueryProvider>
               <FilterContextProvider>

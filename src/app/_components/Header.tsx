@@ -9,7 +9,7 @@ const Header = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="mt-4 mb-8">
+    <div className="mt-4 mb-8 mx-auto w-[90%]">
       <div className="flex justify-between">
         <Link href="/">
           <Image src={logo} alt="logo" width={100} height={100} />

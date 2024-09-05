@@ -30,8 +30,8 @@ const Filters = () => {
   };
 
   return (
-    <div>
-      <form className="flex flex-col" onSubmit={(e) => e.preventDefault()}>
+    <div className="mx-auto w-[90%]">
+      <form className=" flex flex-col" onSubmit={(e) => e.preventDefault()}>
         <input
           className="px-5 py-3 border border-black outline-none rounded-3xl mb-3"
           type="search"
@@ -72,7 +72,7 @@ const Filters = () => {
               Clear
             </button>
           </div>
-          <div className="grid grid-cols-3 gap-3 px-4 py-2 mt-1">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 px-4 py-2 mt-1">
             <span>
               <input
                 type="checkbox"
