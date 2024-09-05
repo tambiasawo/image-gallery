@@ -3,9 +3,6 @@ import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
-import { redirect } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { authenticate } from "../utils/actions";
 
@@ -18,7 +15,7 @@ export function SignInForm() {
   const { pending } = useFormStatus();
 
   return (
-    <section className=" md:w-1/2 mx-auto py-8 flex flex-col justify-center bg-white  px-3 rounded-md w-[90%]">
+    <section className=" md:w-1/2 mx-auto py-8 flex flex-col justify-center bg-white px-3 rounded-md w-full">
       <h2 className="text-center text-black font-semibold text-2xl">Login</h2>
       <form
         action={action}
@@ -69,19 +66,19 @@ export function SignInForm() {
         <div className="flex gap-3 items-center w-full">
           <button
             type="button"
-            className=" w-full py-2 rounded-xl border border-mainBg"
+            className="flex justify-center w-full py-2 rounded-xl border border-mainBg"
             aria-disabled={pending}
             onClick={() => signIn("github", { callbackUrl: "/" })}
           >
-            <GitHubIcon />
+            <img src="/github.svg" width="24" height="24" alt="github" />
           </button>
           <button
             type="button"
-            className=" w-full py-2 rounded-xl border border-mainBg"
+            className="flex justify-center w-full py-2 rounded-xl border border-mainBg"
             aria-disabled={pending}
             onClick={() => signIn("google", { callbackUrl: "/" })}
           >
-            <GoogleIcon />
+            <img src="/google.svg" width="24" height="24" alt="google" />
           </button>
         </div>
       </form>
