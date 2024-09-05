@@ -47,6 +47,7 @@ export const authenticate = async (
       redirect: false,
     });
     if (!response?.error) {
+      console.log({ response });
       window.location.href = "/";
     } else {
       console.log("problem logging in");
