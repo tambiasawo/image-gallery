@@ -35,8 +35,9 @@ export function SignInForm() {
             placeholder="Username"
             name="username"
             className="form-control"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={"test1"}
+            readOnly
+            // onChange={(e) => setUsername(e.target.value)}
             required
           />
 
@@ -50,9 +51,10 @@ export function SignInForm() {
             type={show ? "text" : "password"}
             placeholder="Password"
             name="password"
-            value={password}
+            value={"pass"}
+            readOnly
             className="form-control"
-            onChange={(e) => setPassword(e.target.value)}
+            //onChange={(e) => setPassword(e.target.value)}
           />
           <span
             className="ring-blue-600 pr-3 focus:color-bg-formBg cursor-pointer"
@@ -70,23 +72,24 @@ export function SignInForm() {
         >
           Sign In
         </button>
-
-        <button
-          type="button"
-          className=" w-full py-2 rounded-xl border border-mainBg"
-          aria-disabled={pending}
-          onClick={() => signIn("github", { callbackUrl: "/" })}
-        >
-          <GitHubIcon />
-        </button>
-        <button
-          type="button"
-          className=" w-full py-2 rounded-xl border border-mainBg"
-          aria-disabled={pending}
-          onClick={() => signIn("google", { callbackUrl: "/" })}
-        >
-          <GoogleIcon />
-        </button>
+        <div className="flex gap-3 items-center w-full">
+          <button
+            type="button"
+            className=" w-full py-2 rounded-xl border border-mainBg"
+            aria-disabled={pending}
+            onClick={() => signIn("github", { callbackUrl: "/" })}
+          >
+            <GitHubIcon />
+          </button>
+          <button
+            type="button"
+            className=" w-full py-2 rounded-xl border border-mainBg"
+            aria-disabled={pending}
+            onClick={() => signIn("google", { callbackUrl: "/" })}
+          >
+            <GoogleIcon />
+          </button>
+        </div>
       </form>
     </section>
   );

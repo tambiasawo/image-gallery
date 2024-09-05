@@ -1,3 +1,4 @@
+import { signIn } from "next-auth/react";
 import { ITEMS_PER_PAGE } from "../lib/constants";
 
 type Params = {
@@ -29,4 +30,28 @@ export const getImages = async (
   }
 };
 
-export const authenticate = () => {};
+export const authenticate = async (
+  previousState: void | null,
+  formValues: FormData
+) => {
+  //const router = useRouter();
+  const username = formValues.get("username");
+  const password = formValues.get("password");
+
+  console.log({ username });
+
+  try {
+    const response = await signIn("credentials", {
+      username: username,
+      password: password,
+      redirect: false,
+    });
+    if (!response?.error) {
+      window.location.href = "/";
+    } else {
+      console.log("problem logging in");
+    }
+  } catch (e: any) {
+    console.log(e.message);
+  }
+};
