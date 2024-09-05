@@ -1,4 +1,4 @@
-import NextAuthOptions, { User } from "next-auth";
+import { User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -48,6 +48,6 @@ const authOptions: any = {
       clientSecret: process.env.GOOGLE_SECRET as string,
     }),
   ],
-  secret: process.env.NEXT_AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 export default authOptions;
