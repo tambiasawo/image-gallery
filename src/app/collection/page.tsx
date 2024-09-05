@@ -12,12 +12,11 @@ import { redirect } from "next/navigation";
 const Collection = () => {
   const { data: session } = useSession({
     required: true,
+    onUnauthenticated() {
+      redirect("/login");
+    },
   });
 
-  /* if (!session) {
-    redirect("/login");
-  }
- */
   const dispatch = useAppDispatch();
   const { saves: savedImages } = useAppSelector(
     (state: RootState) => state.saves
