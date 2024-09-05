@@ -6,8 +6,15 @@ import CloseIcon from "@mui/icons-material/Close";
 import { removeSaved } from "../store/savedSlice";
 import { removeLike } from "../store/likedSlice";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const Collection = () => {
+  const { data: session } = useSession();
+  if (!session) {
+    redirect("/login");
+  }
+
   const dispatch = useAppDispatch();
   const { saves: savedImages } = useAppSelector(
     (state: RootState) => state.saves
@@ -72,7 +79,10 @@ const Collection = () => {
           className="hidden md:block"
         />
         <div className="flex-grow flex-shrink basis-[70%]">
-          <div className="flex flex-wrap gap-3 mt-8 items-center justify-center">
+          <div className="mb-8">
+            <h1 className="text-lg ">Welcome {session?.user?.name},</h1>
+          </div>
+          <div className="flex flex-wrap gap-3 items-center justify-center">
             {displayedImages.map((image) => (
               <div key={image.img_id} className="relative group">
                 <button

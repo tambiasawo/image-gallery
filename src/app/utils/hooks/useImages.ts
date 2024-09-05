@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import getImages from "../../actions/getImages";
 import { Category } from "../../lib/types";
+import { getImages } from "../actions";
 
 type Params = {
   searchValue: string;

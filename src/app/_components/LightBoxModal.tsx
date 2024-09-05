@@ -12,7 +12,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import { useAppSelector } from "../store/hooks";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import DownloadIcon from "@mui/icons-material/Download";
+import { useSession } from "next-auth/react";
+
 const style = {
   top: "50%",
   left: "50%",
@@ -41,6 +42,8 @@ export default function LightBoxModal({
   onLike: (img_id: number, img_src: string) => void;
   onRemoveLike: (img_id: number, img_src: string) => void;
 }) {
+  const { data: session } = useSession();
+
   const { imageID, images } = content;
 
   const { saves: savedImages } = useAppSelector((state) => state.saves);
@@ -98,7 +101,6 @@ export default function LightBoxModal({
     setActiveImageIndex(index);
   }, [index, images]);
 
-
   return (
     <Modal
       open={open}
@@ -120,53 +122,58 @@ export default function LightBoxModal({
           </IconButton>
 
           <Box className="space-y-2">
-            <Box className="flex justify-end gap-3">
-              {isLiked ? (
-                <IconButton
-                  onClick={() =>
-                    onRemoveLike(activeImage?.id, activeImage?.largeImageURL)
-                  }
-                >
-                  <FavoriteIcon className="text-red-600 cursor-pointer" />
-                </IconButton>
-              ) : (
-                <IconButton
-                  onClick={() =>
-                    onLike(activeImage?.id, activeImage?.largeImageURL)
-                  }
-                >
-                  <FavoriteBorderIcon
-                    className="cursor-pointer"
-                    htmlColor="#000"
-                  />
-                </IconButton>
-              )}
-              {isSaved ? (
-                <IconButton
-                  onClick={() =>
-                    onSave(activeImage?.id, activeImage?.largeImageURL)
-                  }
-                  className="cursor-pointer"
-                >
-                  <BookmarkIcon htmlColor="#000" />
-                </IconButton>
-              ) : (
-                <IconButton
-                  onClick={() =>
-                    onSave(activeImage?.id, activeImage?.largeImageURL)
-                  }
-                  className="cursor-pointer"
-                >
-                  <BookmarkBorderOutlinedIcon
+            {session && (
+              <Box className="flex justify-end gap-3">
+                {isLiked ? (
+                  <IconButton
                     onClick={() =>
-                      onRemoveSave(activeImage?.id, activeImage?.largeImageURL)
+                      onRemoveLike(activeImage?.id, activeImage?.largeImageURL)
+                    }
+                  >
+                    <FavoriteIcon className="text-red-600 cursor-pointer" />
+                  </IconButton>
+                ) : (
+                  <IconButton
+                    onClick={() =>
+                      onLike(activeImage?.id, activeImage?.largeImageURL)
+                    }
+                  >
+                    <FavoriteBorderIcon
+                      className="cursor-pointer"
+                      htmlColor="#000"
+                    />
+                  </IconButton>
+                )}
+                {isSaved ? (
+                  <IconButton
+                    onClick={() =>
+                      onSave(activeImage?.id, activeImage?.largeImageURL)
                     }
                     className="cursor-pointer"
-                    htmlColor="#000"
-                  />
-                </IconButton>
-              )}
-            </Box>
+                  >
+                    <BookmarkIcon htmlColor="#000" />
+                  </IconButton>
+                ) : (
+                  <IconButton
+                    onClick={() =>
+                      onSave(activeImage?.id, activeImage?.largeImageURL)
+                    }
+                    className="cursor-pointer"
+                  >
+                    <BookmarkBorderOutlinedIcon
+                      onClick={() =>
+                        onRemoveSave(
+                          activeImage?.id,
+                          activeImage?.largeImageURL
+                        )
+                      }
+                      className="cursor-pointer"
+                      htmlColor="#000"
+                    />
+                  </IconButton>
+                )}
+              </Box>
+            )}
             <img
               src={activeImage?.largeImageURL}
               alt="active image"

@@ -3,17 +3,18 @@ import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
-//import { authenticate } from "../actions";
-import GithubLogin from "./GithubLogin";
-//import { credentialsLogin, GithubLoginAction } from "../actions";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import GoogleIcon from "@mui/icons-material/Google";
 import { redirect } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { authenticate } from "../utils/actions";
 
 export function SignInForm() {
   const [show, setShow] = React.useState(false);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  //const [state, action] = useFormState(authenticate, undefined);
+  const [state, action] = useFormState(authenticate, undefined);
   const { pending } = useFormStatus();
 
   const signInHandler = () => {
@@ -25,7 +26,7 @@ export function SignInForm() {
     <section className=" md:w-1/2 mx-auto py-8 flex flex-col justify-center bg-white  px-3 rounded-md w-[90%]">
       <h2 className="text-center text-black font-semibold text-2xl">Login</h2>
       <form
-        // action={action}
+        action={action}
         className="flex flex-col gap-7 p-5 justify-center items-center"
       >
         <div className="flex gap-4 w-full border rounded-xl  items-center px-2">
@@ -34,9 +35,9 @@ export function SignInForm() {
             placeholder="Username"
             name="username"
             className="form-control"
-            value={"admin1"}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
-            readOnly
           />
 
           <span className="text-slate-300">
@@ -49,9 +50,9 @@ export function SignInForm() {
             type={show ? "text" : "password"}
             placeholder="Password"
             name="password"
-            value={"admin1"}
+            value={password}
             className="form-control"
-            readOnly
+            onChange={(e) => setPassword(e.target.value)}
           />
           <span
             className="ring-blue-600 pr-3 focus:color-bg-formBg cursor-pointer"
@@ -69,14 +70,23 @@ export function SignInForm() {
         >
           Sign In
         </button>
-        {/*   <button
+
+        <button
           type="button"
-          className="bg-mainBg w-full py-2 rounded-xl border border-mainBg"
+          className=" w-full py-2 rounded-xl border border-mainBg"
           aria-disabled={pending}
-          onClick={() => GithubLoginAction("github")}
+          onClick={() => signIn("github", { callbackUrl: "/" })}
         >
-          <GithubLogin />
-        </button> */}
+          <GitHubIcon />
+        </button>
+        <button
+          type="button"
+          className=" w-full py-2 rounded-xl border border-mainBg"
+          aria-disabled={pending}
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+        >
+          <GoogleIcon />
+        </button>
       </form>
     </section>
   );

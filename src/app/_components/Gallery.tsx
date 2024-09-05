@@ -13,8 +13,13 @@ import { ITEMS_PER_PAGE } from "../lib/constants.d";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addSave, removeSaved } from "../store/savedSlice";
 import { addLike, removeLike } from "../store/likedSlice";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import InfoIcon from "@mui/icons-material/Info";
 
 const Gallery = () => {
+  const { data: session } = useSession();
+
   const dispatch = useAppDispatch();
   const { saves: savedImages } = useAppSelector((state) => state.saves);
   const { likes: likedImages } = useAppSelector((state) => state.likes);
@@ -98,6 +103,19 @@ const Gallery = () => {
   return (
     <div>
       <div className="flex flex-wrap gap-3 mt-8 items-center justify-center">
+        {!session && (
+          <div className=" absolute top-0 py-1 px-2 rounded-b-md border-2 border-mainBg">
+            <InfoIcon htmlColor="#1976d2" />
+            <span>
+              {"      "}
+              <Link href="/login" className="underline">
+                {" "}
+                Login
+              </Link>{" "}
+              to like or save an image
+            </span>
+          </div>
+        )}{" "}
         {images.length === 0 && (
           <div className="">
             <p className="text-red-500">No images found </p>
@@ -131,29 +149,37 @@ const Gallery = () => {
                 >
                   <p className="flex justify-center items-center gap-8 text-white ">
                     <span className="flex flex-col items-center">
-                      {isLiked ? (
-                        <FavoriteIcon
-                          onClick={() => handleRemoveLike(id, largeImageURL)}
-                          className="text-red-600"
-                        />
+                      {session ? (
+                        isLiked ? (
+                          <FavoriteIcon
+                            onClick={() => handleRemoveLike(id, largeImageURL)}
+                            className="text-red-600"
+                          />
+                        ) : (
+                          <FavoriteBorderIcon
+                            onClick={() => handleAddLike(id, largeImageURL)}
+                          />
+                        )
                       ) : (
-                        <FavoriteBorderIcon
-                          onClick={() => handleAddLike(id, largeImageURL)}
-                        />
+                        ""
                       )}
                     </span>
 
                     <span className="flex flex-col items-center">
-                      {isSaved ? (
-                        <BookmarkIcon
-                          onClick={() =>
-                            handleRemoveBookmark(id, largeImageURL)
-                          }
-                        />
+                      {session ? (
+                        isSaved ? (
+                          <BookmarkIcon
+                            onClick={() =>
+                              handleRemoveBookmark(id, largeImageURL)
+                            }
+                          />
+                        ) : (
+                          <BookmarkBorderOutlinedIcon
+                            onClick={() => handleAddBookmark(id, largeImageURL)}
+                          />
+                        )
                       ) : (
-                        <BookmarkBorderOutlinedIcon
-                          onClick={() => handleAddBookmark(id, largeImageURL)}
-                        />
+                        ""
                       )}
                     </span>
                   </p>

@@ -3,10 +3,11 @@ import Link from "next/link";
 import React from "react";
 import logo from "../assets/logo.png";
 import Image from "next/image";
-import { Tooltip } from "@mui/material";
-//import { logout } from "../actions";
+import { signOut, useSession } from "next-auth/react";
 
 const Header = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
+  const { data: session } = useSession();
+
   return (
     <div className="mt-4 mb-8">
       <div className="flex justify-between">
@@ -15,14 +16,19 @@ const Header = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
         </Link>
 
         <div className="flex justify-between gap-3">
-         {/*  <Tooltip title="Coming Soon...">
-            <Link href="#" className="hover:underline text-gray-500" aria-disabled >
-              Login
+          <div className="flex items-center gap-4">
+            <Link href="/collection" className="hover:underline">
+              My Collection
             </Link>
-          </Tooltip> */}
-          <Link href="/collection" className="hover:underline">
-            My Collection
-          </Link>
+            {session && (
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className=" px-2 py-1 rounded-md hover:underline"
+              >
+                Sign Out
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

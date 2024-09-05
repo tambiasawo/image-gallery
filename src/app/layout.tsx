@@ -5,7 +5,8 @@ import QueryProvider from "./utils/providers/QueryProvider";
 import { FilterContextProvider } from "./utils/providers/FilterContextProvider";
 import Header from "./_components/Header";
 import ReduxProvider from "./utils/providers/ReduxProvider";
-import { AuthContextProvider } from "./utils/providers/AuthContextProvider";
+import { AuthProvider } from "./utils/providers/AuthProvider";
+import Alert from '@mui/material/Alert';
 
 export const metadata: Metadata = {
   title: "Images Filtering",
@@ -18,7 +19,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthContextProvider>
+    <AuthProvider>
       <html lang="en">
         <body className="mx-auto w-[80%] ">
           <ReduxProvider>
@@ -31,6 +32,6 @@ export default async function RootLayout({
           </ReduxProvider>
         </body>
       </html>
-    </AuthContextProvider>
+    </AuthProvider>
   );
 }
