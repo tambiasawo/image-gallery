@@ -14,8 +14,6 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addSave, removeSaved } from "../store/savedSlice";
 import { addLike, removeLike } from "../store/likedSlice";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
-import InfoIcon from "@mui/icons-material/Info";
 
 const Gallery = () => {
   const { data: session } = useSession();
@@ -100,28 +98,14 @@ const Gallery = () => {
         <p> An error occurred. Please try again.</p>
       </div>
     );
-
   return (
     <div>
-      <div className="flex flex-wrap gap-3 mt-8 items-center justify-center">
-        {!session && (
-          <div className=" absolute top-0 py-1 px-2 rounded-b-md border-2 border-mainBg">
-            <InfoIcon htmlColor="#1976d2" />
-            <span>
-              {"      "}
-              <Link href="/login" className="underline">
-                {" "}
-                Login
-              </Link>{" "}
-              to like or save an image
-            </span>
-          </div>
-        )}{" "}
-        {images.length === 0 && (
-          <div className="">
-            <p className="text-red-500">No images found </p>
-          </div>
-        )}
+      {images.length === 0 && (
+        <div className="">
+          <p className="text-red-500">No images found </p>
+        </div>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-center gap-y-5">
         {images.map((image: Image) => {
           const { id, largeImageURL } = image;
           const isSaved = savedImages.find((image) => image.img_id === id);
@@ -131,15 +115,15 @@ const Gallery = () => {
             <div
               onMouseEnter={(e) => handleMouseEnter(id)}
               onMouseLeave={handleMouseLeave}
-              className="relative cursor-pointer image-container"
+              className="relative cursor-pointer image-container w-full h-[380px] max-w-[300px]"
               key={id}
             >
               <img
-                className="image-grid-item image-item"
+                className="w-full h-[380px] image-grid-item image-item object-cover"
                 src={largeImageURL}
                 alt={image.tags}
-                width={250}
-                height={200}
+                width={300}
+                height={300}
                 onClick={(e) => handleOpen(id)}
               />
 

@@ -5,6 +5,9 @@ import GoogleProvider from "next-auth/providers/google";
 
 const authOptions: any = {
   session: { strategy: "jwt" },
+  pages: {
+    signIn: "/login", // Specify the custom login page route
+  },
   providers: [
     Credentials({
       name: "Credentials",

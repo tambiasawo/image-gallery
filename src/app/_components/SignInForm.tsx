@@ -10,10 +10,8 @@ export function SignInForm() {
   const [show, setShow] = React.useState(false);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-
   const [state, action] = useFormState(authenticate, undefined);
   const { pending } = useFormStatus();
-
   return (
     <section className=" md:w-1/2 mx-auto py-8 flex flex-col justify-center bg-white px-3 rounded-md w-full">
       <h2 className="text-center text-black font-semibold text-2xl">Login</h2>
@@ -26,7 +24,7 @@ export function SignInForm() {
             type="text"
             placeholder="Username"
             name="username"
-            className="form-control"
+            className="form-control active:border-green-500"
             value={"test1"}
             readOnly
             // onChange={(e) => setUsername(e.target.value)}
@@ -46,7 +44,6 @@ export function SignInForm() {
             value={"pass"}
             readOnly
             className="form-control"
-            //onChange={(e) => setPassword(e.target.value)}
           />
           <span
             className="ring-blue-600 pr-3 focus:color-bg-formBg cursor-pointer"
@@ -58,7 +55,7 @@ export function SignInForm() {
 
         <button
           type="submit"
-          className="bg-mainBg w-full py-2 rounded-xl"
+          className="bg-mainBg w-full py-2 rounded-xl hover:bg-[#1976d2d4] text-white hover:text-black transition-colors"
           aria-disabled={pending}
         >
           Sign In
@@ -66,7 +63,7 @@ export function SignInForm() {
         <div className="flex gap-3 items-center w-full">
           <button
             type="button"
-            className="flex justify-center w-full py-2 rounded-xl border border-mainBg"
+            className="flex justify-center w-full py-2 rounded-xl border border-mainBg hover:bg-[#1976d2d4] hover:text-white transition-colors"
             aria-disabled={pending}
             onClick={() => signIn("github", { callbackUrl: "/" })}
           >
@@ -74,7 +71,7 @@ export function SignInForm() {
           </button>
           <button
             type="button"
-            className="flex justify-center w-full py-2 rounded-xl border border-mainBg"
+            className="flex justify-center w-full py-2 rounded-xl border border-mainBg hover:bg-[#1976d2d4] transition-colors"
             aria-disabled={pending}
             onClick={() => signIn("google", { callbackUrl: "/" })}
           >

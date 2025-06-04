@@ -180,20 +180,13 @@ export default function LightBoxModal({
               className="w-[250px] h-[300px] max-w-[250px] md:w-[600px] md:max-w-[500px] md:h-[450px] rounded-lg object-cover object-center mx-auto"
             />
             <Box className="flex flex-col gap-2 md:flex-row justify-between items-center text-black ">
-              <span className="flex justify-center items center gap-2">
-                {activeImage?.tags.split(",").map((tag: string) => (
-                  <Chip label={tag} key={tag} />
-                ))}
-              </span>
-              <span>
-                <Link
-                  href={activeImage?.pageURL ?? ""}
-                  target="_blank"
-                  className="text-sm flex items-center underline gap-1 hover:underline"
-                >
-                  Credits
-                  <OpenInNewIcon fontSize="small" />
-                </Link>
+              <span className="flex justify-center gap-2 max-w-[50px] md:max-w-full mx-auto">
+                {activeImage?.tags
+                  .split(",")
+                  .slice(0, 5)
+                  .map((tag: string) => (
+                    <Chip label={tag} key={tag} />
+                  ))}
               </span>
             </Box>
           </Box>
@@ -214,13 +207,23 @@ export default function LightBoxModal({
               src={image.largeImageURL}
               key={image.id}
               alt={image.tags}
-              className={`cursor-pointer rounded-lg !w-[150px] min-w-[150px] !h-[100px] object-cover border-2 object-center  ${
-                image.id === activeImage?.id ? "border-red-500" : ""
+              className={`cursor-pointer rounded-lg !w-[150px] min-w-[150px] !h-[100px] object-cover border-2 object-center   ${
+                image.id === activeImage?.id ? "border-green-500" : ""
               }`}
               onClick={() => handleChangeImage(image)}
             />
           ))}
         </Box>
+        <span className="flex justify-center items-start !md:mt-0">
+          <Link
+            href={activeImage?.pageURL ?? ""}
+            target="_blank"
+            className="text-xs  flex items-center underline gap-1 hover:underline"
+          >
+            Credits
+            <OpenInNewIcon fontSize="small" />
+          </Link>
+        </span>
       </Box>
     </Modal>
   );

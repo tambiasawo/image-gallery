@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 
 const Collection = () => {
   const { data: session } = useSession();
-  
+
   if (!session) {
     redirect("/login");
   }
@@ -50,20 +50,20 @@ const Collection = () => {
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-auto">
           <ul className="flex flex-row justify-center items-center md:items-start md:flex-col gap-4">
-            <li className="w-full">
+            <li className="w-full flex justify-center">
               <button
-                className={`collection-option ${
-                  currentTab === "likes" ? "bg-slate-200" : ""
+                className={`collection-option  ${
+                  currentTab === "likes" ? "bg-mainBg" : ""
                 }`}
                 onClick={showLikedImages}
               >
                 Liked
               </button>
             </li>
-            <li className="w-full">
+            <li className="w-full flex justify-center">
               <button
                 className={`collection-option ${
-                  currentTab === "saves" ? "bg-slate-200" : ""
+                  currentTab === "saves" ? "bg-mainBg" : ""
                 }`}
                 onClick={showSavedImages}
               >
@@ -78,15 +78,17 @@ const Collection = () => {
           flexItem
           className="hidden md:block"
         />
-        <div className="flex-grow flex-shrink basis-[70%]">
-          <div className="mb-8">
-            <h1 className="text-lg ">Welcome {session?.user?.name},</h1>
+        <div className="flex-grow flex-shrink basis-[70%] container">
+          <div className="mb-8 ">
+            <h1 className="text-lg text-center md:text-left">
+              Welcome {session?.user?.name},
+            </h1>
           </div>
-          <div className="flex flex-wrap gap-3 items-center justify-center">
+          <div className="flex flex-wrap gap-5 items-center justify-center">
             {displayedImages.map((image) => (
               <div key={image.img_id} className="relative group">
                 <button
-                  className=" hidden rounded-[50%] cursor-pointer absolute right-2 top-2 group-hover:block "
+                  className=" hidden rounded-[50%] cursor-pointer absolute right-2 top-2 group-hover:block"
                   onClick={() => handleClear(image)}
                 >
                   <CloseIcon
@@ -98,8 +100,10 @@ const Collection = () => {
                 <img
                   key={image.img_id}
                   src={image.img_src}
+                  width={300}
+                  height={400}
                   alt="displayed image"
-                  className="image-grid-item image-item"
+                  className="image-grid-item image-item h-[400px]"
                 />
               </div>
             ))}

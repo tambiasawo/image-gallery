@@ -4,12 +4,13 @@
 
 :root {
   --mainBg: #1976d2;
+  --hoverBg: #1976d2ad;
 }
 .image-container:hover .image-item {
   filter: brightness(0.5);
 }
 .image-grid-item {
-  @apply rounded-lg w-[250px] h-[300px] object-cover shadow-md;
+  @apply rounded-lg object-cover shadow-md;
 }
 
 .scrollable-image-container {
@@ -22,7 +23,7 @@
 }
 
 .collection-option {
-  @apply w-full px-7 py-1 rounded-lg hover:bg-slate-200 ;
+  @apply w-[75%] px-7 py-1 rounded-lg hover:bg-[#1976d2b7]  mx-auto;
 }
 
 .form-div-control {

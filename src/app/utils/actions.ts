@@ -1,11 +1,13 @@
 import { signIn } from "next-auth/react";
 import { ITEMS_PER_PAGE } from "../lib/constants";
+import { useRouter } from "next/router"; // Import useRouter
 
 type Params = {
   imageType: string;
   orderBy: string;
   page: number;
 };
+
 export const getImages = async (
   searchValue: string,
   categoriesArray: Array<string>,
@@ -30,23 +32,20 @@ export const getImages = async (
   }
 };
 
-export const authenticate = async (
-  previousState: void | null,
-  formValues: FormData
-) => {
-  //const router = useRouter();
+export const authenticate = async (router:any, formValues: FormData) => {
   const username = formValues.get("username");
   const password = formValues.get("password");
-
 
   try {
     const response = await signIn("credentials", {
       username: username,
       password: password,
-      redirect: false,
+      redirect: false, // Prevent auto-redirect to default page
     });
+
     if (!response?.error) {
-      window.location.href = "/";
+      const callbackUrl = router.query.callbackUrl || "/";
+      router.push(callbackUrl); // Redirect to the intended page
     } else {
       console.log("problem logging in");
     }
