@@ -24,7 +24,7 @@ export function SignInForm() {
             type="text"
             placeholder="Username"
             name="username"
-            className="form-control active:border-green-500"
+            className="form-control focus:border-mainBg"
             value={"test1"}
             readOnly
             // onChange={(e) => setUsername(e.target.value)}
@@ -43,7 +43,7 @@ export function SignInForm() {
             name="password"
             value={"pass"}
             readOnly
-            className="form-control"
+            className="form-control focus:border-mainBg"
           />
           <span
             className="ring-blue-600 pr-3 focus:color-bg-formBg cursor-pointer"
