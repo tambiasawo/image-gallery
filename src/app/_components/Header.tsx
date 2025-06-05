@@ -4,8 +4,7 @@ import React from "react";
 import logo from "../assets/logo.png";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
-import InfoIcon from "@mui/icons-material/Info";
-import FolderSpecialIcon from "@mui/icons-material/FolderSpecial";
+
 const Header = () => {
   const { data: session } = useSession();
 

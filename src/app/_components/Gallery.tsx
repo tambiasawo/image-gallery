@@ -30,10 +30,13 @@ const Gallery = () => {
   );
   const [page, setPage] = React.useState(1);
   const {
-    data: { hits: images, totalHits: count } = { hits: [], count: 0 },
+    data: { hits: images, totalHits: count } = { hits: [], totalHits: 0 },
     isLoading,
+    isFetchingNextPage,
     error,
-  } = useImages({ ...filters, checkedCategories, page });
+    fetchNextPage,
+    hasNextPage,
+  } = useImages({ ...filters, checkedCategories });
 
   const handleOpen = (id: number) => {
     setImageID(id.toString());
@@ -83,6 +86,28 @@ const Gallery = () => {
     [dispatch]
   );
 
+  const scrollFn = () => {
+    const clientHeight = document.documentElement.clientHeight;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    console.log({ clientHeight, scrollHeight, scrollTop });
+
+    if (
+      !isFetchingNextPage &&
+      hasNextPage &&
+      scrollTop + clientHeight >= scrollHeight - 300
+    )
+      fetchNextPage();
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", scrollFn);
+    scrollFn();
+    return () => {
+      window.removeEventListener("scroll", scrollFn);
+    };
+  }, [isFetchingNextPage, hasNextPage]);
+
   if (isLoading)
     return (
       <div className="grid place-items-center h-[100vh]">
@@ -94,17 +119,18 @@ const Gallery = () => {
 
   if (error)
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center text-red-500">
         <p> An error occurred. Please try again.</p>
+      </div>
+    );
+  if (images?.length === 0)
+    return (
+      <div className="">
+        <p className="text-red-500">No images found </p>
       </div>
     );
   return (
     <div>
-      {images.length === 0 && (
-        <div className="">
-          <p className="text-red-500">No images found </p>
-        </div>
-      )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-center gap-y-5">
         {images.map((image: Image) => {
           const { id, largeImageURL } = image;

@@ -108,7 +108,9 @@ const Collection = () => {
               </div>
             ))}
             {displayedImages.length === 0 && (
-              <p className="center">No images added. Like or bookmark an image to see them here</p>
+              <p className="text-center w-[80%] ">
+                No images added. Hover or tap on an image to like or bookmark it
+              </p>
             )}
           </div>
         </div>

@@ -33,7 +33,7 @@ const Filters = () => {
     <div className="mx-auto w-[90%]">
       <form className=" flex flex-col" onSubmit={(e) => e.preventDefault()}>
         <input
-          className="px-5 py-3 border border-black outline-none rounded-3xl mb-3"
+          className="px-5 py-3 border border-black outline-none rounded-3xl mb-3 focus:border-mainBg"
           type="search"
           name="searchValue"
           placeholder="Search..."

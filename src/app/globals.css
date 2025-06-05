@@ -31,7 +31,7 @@
 }
 
 .form-control {
-  @apply w-full pl-2 py-3 rounded-xl focus:outline-none text-black;
+  @apply w-full pl-2 py-3 rounded-xl focus:outline-none text-black focus:border focus:ring-blue-600;
 }
 
 .form-control:focus + * {
@@ -40,4 +40,8 @@
 
 .form-control:not([type="email"]) ~ span:hover {
   color: var(--mainBg);
+}
+
+input {
+  @apply focus:border focus:ring-blue-600;
 }
