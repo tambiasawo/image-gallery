@@ -1,5 +1,4 @@
 "use client";
-import { Session } from "next-auth";
 import React from "react";
 
 const AuthContext = React.createContext<any>({
