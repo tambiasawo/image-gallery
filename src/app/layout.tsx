@@ -6,7 +6,7 @@ import { FilterContextProvider } from "./utils/providers/FilterContextProvider";
 import Header from "./_components/Header";
 import ReduxProvider from "./utils/providers/ReduxProvider";
 import { AuthProvider } from "./utils/providers/AuthProvider";
-import Alert from '@mui/material/Alert';
+import BuiltWith from "./_components/BuiltWith";
 
 export const metadata: Metadata = {
   title: "Images Filtering",
@@ -30,6 +30,7 @@ export default async function RootLayout({
               </FilterContextProvider>
             </QueryProvider>
           </ReduxProvider>
+            <BuiltWith />
         </body>
       </html>
     </AuthProvider>
