@@ -25,7 +25,7 @@ const actions = [
     icon: <TailwindIcon />,
   },
   {
-    name: "TanStack Query",
+    name: "TanStackQuery",
     icon: <TanStackQueryIcon />,
   },
   {
